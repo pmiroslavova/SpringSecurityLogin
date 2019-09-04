@@ -1,11 +1,15 @@
 package com.mkyong.config;
 
+import com.mkyong.error.MySimpleUrlAuthenticationSuccessHandler;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.web.access.AccessDeniedHandler;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 @Configuration
 // http://docs.spring.io/spring-boot/docs/current/reference/html/howto-security.html
@@ -19,6 +23,20 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     // roles admin allow to access /admin/**
     // roles user allow to access /user/**
     // custom 403 access denied handler
+
+    @Bean("authenticationManager")
+    @Override
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        return super.authenticationManagerBean();
+    }
+    // Este handler te permitirá cambiar la url de respuesta, para que el alumno vaya a la pagina alumno, admin a la de admin, etc.
+// Pero esto es una alteración a la casuística normal. Lo común es que cada uno vaya a su url y le deje pasar con success o no.
+// Planteate también una web con accesos alumno/admin/etc, que te rediría a la página y te pida el pass directamente.
+
+    @Bean
+    public AuthenticationSuccessHandler myAuthenticationSuccessHandler(){
+        return new MySimpleUrlAuthenticationSuccessHandler();
+    }
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
@@ -32,6 +50,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .formLogin()
                 .loginPage("/login")
                 .permitAll()
+                .successHandler(myAuthenticationSuccessHandler())
                 .and()
                 .logout()
                 .permitAll()

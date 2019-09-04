@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <script language="JavaScript">
+            function mostrarReserva(){
+            console.log($('#estadoReserva').val());
+            }
+
+            function agregarReserva() {
+                var formData = {};
+                formData['cantidad'] = $('#cantidad').val();
+                formData['fechaReservaEntrada'] = $('#entrada').val();
+                formData['fechaReservaSalida'] = $('#salida').val();
+                console.log($('#formData').val);
+                $.ajax({
+                    type: "POST",
+                    url: 'http://localhost:8080/reserva/',
+                    dataType: 'json',
+                    async: false,
+                    // El objeto hay que convertirlo a texto
+                    data: JSON.stringify(formData),
+                    contentType: 'application/json'
+                });
+            }
+        </script>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <link href="https://gestion2.urjc.es/plantilla/assets/global/plugins/essentials-plugins.min.css" media="screen" rel="stylesheet" type="text/css"/>
+        <link href="https://gestion2.urjc.es/plantilla/assets/layouts/frontend/layout.min.css" media="screen" rel="stylesheet" type="text/css"/>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"/>
+
+        <link href="https://gestion2.urjc.es/plantilla/css" media="screen" rel="stylesheet" type="text/css"/>
+        <link href="https://gestion2.urjc.es/plantilla/essentials-plugins.min.css" media="screen" rel="stylesheet" type="text/css"/>
+        <link href="https://gestion2.urjc.es/plantilla/layout.min.css" media="screen" rel="stylesheet" type="text/css"/>
+        <link href="https://gestion2.urjc.es/plantilla/custom.css" media="screen" rel="stylesheet" type="text/css"/>
+        <link href="https://gestion2.urjc.es/plantilla/img/favicon.ico" rel="shortcut icon" type="../static/img/Logo_URJC.png"/>
+    <head>
+        <title>Iniciar Sesión</title>
+    </head>
+    <body>
+    <!-- BEGIN TOP BAR -->
+        <div class="pre-header">
+            <div class="container">
+                <div class="row">
+                    <!-- BEGIN TOP BAR LEFT PART -->
+                    <div class="col-md-6 col-sm-6 additional-shop-info pull-left">
+                        <ul class="list-unstyled list-inline"><li><a href="https://www.urjc.es/" target="_blank"><i class="fa fa-globe"></i> ir a www.urjc.es</a></li>
+                            <li style="border-right: none;"><i class="fa fa-phone"></i><span>.</span></li>
+                            <li><i class="fa fa-envelope-o"></i><span>becas.colaboracion@urjc.es</span></li>
+                        </ul>
+                    </div>
+                    <!-- END TOP BAR LEFT PART -->
+                    <!-- BEGIN TOP BAR MENU-->
+                    <div class="col-md-6 col-sm-6 login-reg-links">
+                        <ul class="list-unstyled list-inline pull-right">
+
+                            <li><i class="fa fa-cog topbar-info-icon top-2"></i><a href="https://gestion2.urjc.es/becascolaboracion/admin/login">Acceso Alumnos</a></li>
+                            <li><i class="fa fa-cog topbar-info-icon top-2"></i><a href="https://gestion2.urjc.es/becascolaboracion/admin/login">Acceso Gestores</a></li>
+                            <li><i class="fa fa-cog topbar-info-icon top-2"></i><a href="https://gestion2.urjc.es/becascolaboracion/admin/login">Acceso Administradoress</a></li>
+                        </ul>
+                    </div>
+                    <!-- END TOP BAR MENU -->
+                </div>
+            </div>
+        </div>
+    <!-- END TOP BAR -->
+
+    <!-- BEGIN HEADER -->
+    <div class="header">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a class="site-logo" href="https://www.urjc.es/" target="_blank">
+                        <img id="logo-base" src="../static/img/logo.png" alt="Universidad Rey Juan Carlos" style="width:30px"/>
+                        <img id="logo-mini" src="../static/img/logo.png" alt="Universidad Rey Juan Carlos"/>
+                    </a>
+                </div>
+                <!-- END LOGO -->
+            </div>
+
+            <a href="javascript:void(0);" class="mobi-toggler"><i class="fa fa-bars"></i></a>
+            <div class="nav navbar-nav pull-left">
+                <div class="navbar-text">
+                    <h2>Reserva de Salas</h2>
+                </div>
+            </div>
+
+            <!-- BEGIN NAVIGATION -->
+            <div class="header-navigation pull-right font-transform-inherit">
+                <ul>
+                </ul>
+            </div>
+            <!-- END NAVIGATION -->
+        </div>
+    </div>
+    <!-- Header END -->
+
+    <!-- CONTENIDO DE LA PAGINA -->
+    <!-- BEGIN PAGE CONTAINER -->
+    <div class="page-container">
+        <div class="container-fluid">
+            <!-- BEGIN BREADCRUMBS -->
+            <div class="row breadcrumbs margin-bottom-20">
+                <div class="container">
+                    <div class="col-md-12 col-sm-12">
+                        <h2>Reserva</h2>
+                    </div>
+                </div>
+            </div>
+            <!-- END BREADCRUMBS -->
+            <!-- BEGIN CONTAINER -->
+            <div class="container">
+                <div class="row">
+                    <div class="well col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 text-center">
+                        Bienvenido a la plataforma de Reserva de Salas de la Universidad Rey Juan Carlos
+                    </div>
+                    <div class="col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 login-signup-page">
+                        <form class="form-signin"  th:action="@{/login}" method="post">
+                           <div style="display: flex; justify-content: center;">
+                            <img class="mb-4" src="../img/Logo_URJC.png" alt="" width="72" height="72" style="margin_left:90px"/>
+                            </div>
+                            <h1 class="h3 mb-3 font-weight-normal" style="text-align:center;">Plataforma de Reserva de Salas</h1>
+                            <div th:if="${param.error}">
+                                <div class="alert alert-danger">
+                                    Invalid username and password.
+                                </div>
+                            </div>
+                            <div th:if="${param.logout}">
+                                <div class="alert alert-info">
+                                    You have been logged out.
+                                </div>
+                            </div>
+                            <p class="comment-form-url">
+                                <label for="username" class="sr-only">Nombre de usuario</label>
+                                <input type="text" id="username" class="form-control" placeholder="Nombre de usuario"/>
+                            </p>
+
+                            <p class="comment-form-url">
+                                <label for="password" class="sr-only">Contraseña</label>
+                                <input type="password" id="password" class="form-control" placeholder="Contraseña"/>
+                            </p>
+                            <!--<div class="checkbox mb-3">-->
+                            <p class="comment-form-url">
+                                <label>
+                                    <input type="checkbox" value="remember-me"/> Recuerdame
+                                </label>
+                            </p>
+                            <!--</div>-->
+                            <button class="btn btn-lg btn-primary btn-block" type="submit" style="background-color:red; border-color:red;">Acceder</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END CONTAINER -->
+    </div>
+    <!-- FIN PAGE CONTAINER -->
+    <!-- FIN DE CONTENIDO DE LA PAGINA -->
+    </body>
+
+<div class="clearfix"></div>
+
+<!-- BEGIN COPYRIGHT -->
+<div class="copyright">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <p>
+                    <span class="margin-right-10">2019 © Universidad Rey Juan Carlos</span>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END COPYRIGHT -->
+
+<!-- INIT JAVASCRIPT -->
+<script type="text/javascript" src="https://gestion2.urjc.es/plantilla/essentials-plugins.min.js"></script>
+<script type="text/javascript" src="https://gestion2.urjc.es/plantilla/layout.min.js"></script>
+<script type="text/javascript" src="https://gestion2.urjc.es/plantilla/jquery.form.js"></script>
+<script type="text/javascript" src="https://gestion2.urjc.es/plantilla/login.js"></script>
+<script type="text/javascript" src="https://gestion2.urjc.es/plantilla/funciones.js"></script>
+<script type="text/javascript" src="https://gestion2.urjc.es/plantilla/iban.js"></script>
+<script type="text/javascript" src="https://gestion2.urjc.es/plantilla/custom.js"></script>
+<script type="text/javascript" src="https://gestion2.urjc.es/plantilla/custom-client.js"></script>
+<script type="text/javascript" src="https://gestion2.urjc.es/plantilla/custom-form.js"></script>
+<script type="text/javascript" src="https://gestion2.urjc.es/plantilla/table-datatables-responsive.js"></script>
+<script type="text/javascript" src="https://gestion2.urjc.es/plantilla/form-validation.js"></script>
+<script type="text/javascript" src="https://gestion2.urjc.es/plantilla/components-date-time-pickers.js"></script>
+<script type="text/javascript" src="https://gestion2.urjc.es/plantilla/additional-methods.js"></script>
+<script type="text/javascript" src="https://gestion2.urjc.es/plantilla/ui-sweetalert.min.js"></script>
+<script type="text/javascript" src="https://gestion2.urjc.es/plantilla/bootstrap-fileinput.js"></script>
+<script type="text/javascript" src="https://gestion2.urjc.es/plantilla/bootstrap-maxlength.min.js"></script>
+<script type="text/javascript" src="https://gestion2.urjc.es/plantilla/components-bootstrap-maxlength.js"></script>
+<script type="text/javascript">
+            $(document).ready(function() {
+                //App.init();
+                Layout.init();
+                //Layout.initNavScrolling();
+                Login.init();
+                //TableAdvanced.init();
+                //Fixed header solo si la pantalla tiene minimo 480px de alto
+                if ($(window).height() > 768) {
+                   Layout.initFixHeaderWithPreHeader(); /* Switch On Header Fixing (only if you have pre-header) */
+                }
+
+            });
+        </script>
+<!-- END INIT JAVASCRIPT -->
+</html>
+
+
+
+
+
+
